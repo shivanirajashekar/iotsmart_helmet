@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.shivani.firstapp">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+Androidmanifest       
+
+       android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".login_Activity" />
+        <activity android:name=".Registration" />
+        <activity android:name=".notifications" />
+        <activity android:name=".gpslocation" />
+
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <activity android:name=".sensoroutput"></activity>
+    </application>
+</manifest>
+
+
+main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="login_activity"
+    android:background="@drawable/btn_bg"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    >
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_helmet"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel"
+        android:layout_below="@+id/logo"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SMART HELMET"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:typeface="sans"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="25dp"
+
+
+            />
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ProgressBar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        style="?android:attr/progressBarStyle"
+        android:layout_marginBottom="16dp"
+        />
+
+    </RelativeLayout>
+
+
+login.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shivani.firstapp.login_Activity"
+    android:background="@drawable/gradient_bg"
+    >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="109dp"
+        android:src="@drawable/ic_helmet"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="222dp"
+        android:orientation="vertical"
+        android:layout_margin="30dp"
+        android:layout_below="@+id/imageView"
+
+
+        tools:ignore="ExtraText">
+
+        <EditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/button_bg"
+            android:hint=" Enter Email"
+            android:inputType="textEmailAddress"
+
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/button_bg"
+            android:drawableLeft="@android:drawable/ic_lock_lock"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register User"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorAccent"
+            />
+        <TextView
+            android:id="@+id/textviewregister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Already Registered? Signin here "
+            android:layout_marginBottom="55dp"
+            android:textSize="18sp"
+            android:layout_marginTop="25dp"/>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+registration.xml
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.example.shivani.firstapp.Registration">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="User's phone number"
+        android:id="@+id/phno"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="USER'S Name :"
+
+        android:id="@+id/Em2"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="blood group"
+        android:id="@+id/bloodgrgp"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Emergency contact1 :"
+        android:id="@+id/Em1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submit"/>
+
+
+</LinearLayout>
+
+
+
+
+
+
+JAVA FILES
+
+mainactivity
+package com.example.shivani.firstapp;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import static java.lang.Thread.sleep;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }finally {
+                    //pd.dismiss
+                    startActivity(new Intent(MainActivity.this,login_Activity.class));
+                }
+            }
+        });
+        t.start();
+
+    }
+}
+
+login activity
+
+
+package com.example.shivani.firstapp;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class login_Activity extends AppCompatActivity   {
+    EditText etusn, etpwd;
+    Button btn1;
+    TextView textviewsignup;
+    private FirebaseAuth firebaseAuth;
+   // ProgressBar progressBar;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login_);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+       // ProgressDialog progressDialog = new ProgressDialog(this);
+
+        etusn=(EditText)findViewById(R.id.etUserName);
+        etpwd=(EditText)findViewById(R.id.etPassword);
+
+        textviewsignup=(TextView)findViewById(R.id.textviewregister);
+        btn1 =(Button)findViewById(R.id.btnLogin);
+
+        textviewsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+           loginUser();
+            }
+
+            private void loginUser() {
+
+                String usn = etusn.getText().toString().trim();
+                String pwd = etpwd.getText().toString().trim();
+
+                firebaseAuth.signInWithEmailAndPassword(usn, pwd)
+                        .addOnCompleteListener(login_Activity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+
+                                    Intent intent = new Intent(login_Activity.this, Registration.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(login_Activity.this, "authentication failed", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+            }
+        });
+
+
+       btn1.setOnClickListener(new View.OnClickListener() {
+           @Override
+            public void onClick(View v) {
+//               if (v == btn1)
+               registerUser();
+
+           }
+    });
+
+
+
+    }
+    public void registerUser(){
+        String usn = etusn.getText().toString().trim();
+        String pwd = etpwd.getText().toString().trim();
+        if(TextUtils.isEmpty(usn)){
+            //email is empty
+            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+            return;
+
+        }
+        if(TextUtils.isEmpty(pwd)){
+            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+            return;
+
+        }
+
+
+        //progressDialog.setMessage("Registering User...");
+        //progressDialog.show();
+
+        firebaseAuth.createUserWithEmailAndPassword(usn,pwd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                 Toast.makeText(login_Activity.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
+                 startActivity(new Intent(login_Activity.this,Registration.class));
+                }
+                else{ Toast.makeText(login_Activity.this,"could not register .please retry",Toast.LENGTH_SHORT).show();
+
+            }
+
+
+    }
+
+
+
+
+
+
+
+});}
+
+}
+
+
+Registration
+
+package com.example.shivani.firstapp;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.shivani.firstapp.model.Person;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class Registration extends AppCompatActivity {
+    private EditText tv1,tv2,tv3,tv4;
+    Button b1;
+    DatabaseReference databaseReference;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registration);
+        tv1= (EditText) findViewById(R.id.phno);
+        tv2= (EditText) findViewById(R.id.bloodgrgp);
+        tv3= (EditText) findViewById(R.id.Em1);
+        tv4= (EditText) findViewById(R.id.Em2);
+        databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        b1= (Button) findViewById(R.id.submit);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adddetails();
+
+                Intent intent=new Intent(Registration.this,gpslocation.class);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+    public void adddetails()
+    {
+        String phNumber = tv1.getText().toString();
+        String blood = tv2.getText().toString();
+        String em1 = tv3.getText().toString();
+        String em2 = tv4.getText().toString();
+
+        Person obj = new Person(phNumber,blood,em1,em2);
+
+        databaseReference.child("details").setValue(obj);
+        Toast.makeText(this, "Information Added!", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+}
+
+
+gpslocation
+
+
+package com.example.shivani.firstapp;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.shivani.firstapp.model.Person;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class Registration extends AppCompatActivity {
+    private EditText tv1,tv2,tv3,tv4;
+    Button b1;
+    DatabaseReference databaseReference;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registration);
+        tv1= (EditText) findViewById(R.id.phno);
+        tv2= (EditText) findViewById(R.id.bloodgrgp);
+        tv3= (EditText) findViewById(R.id.Em1);
+        tv4= (EditText) findViewById(R.id.Em2);
+        databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        b1= (Button) findViewById(R.id.submit);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adddetails();
+
+                Intent intent=new Intent(Registration.this,gpslocation.class);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+    public void adddetails()
+    {
+        String phNumber = tv1.getText().toString();
+        String blood = tv2.getText().toString();
+        String em1 = tv3.getText().toString();
+        String em2 = tv4.getText().toString();
+
+        Person obj = new Person(phNumber,blood,em1,em2);
+
+        databaseReference.child("details").setValue(obj);
+        Toast.makeText(this, "Information Added!", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+}
+
+
+notifications
+
+package com.example.shivani.firstapp;
+
+import android.app.Activity;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.telephony.SmsManager;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.example.shivani.firstapp.model.Person;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class notifications extends Activity {
+
+    DatabaseReference dbUserRef,detailsRef;
+    FirebaseAuth mAuth;
+    String phone;
+    Person person;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notifications);
+
+
+        mAuth = FirebaseAuth.getInstance();
+
+        dbUserRef = FirebaseDatabase.getInstance().getReference("user");
+        //String info = dbUserRef.child("info").toString();
+
+
+       // if()
+        dbUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot childSnapshot:dataSnapshot.getChildren()){
+                    if(childSnapshot.getKey().equals("details")){
+                        person=childSnapshot.getValue(Person.class);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+           /* detailsRef = FirebaseDatabase.getInstance().getReference("Users");
+            detailsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //Users users = dataSnapshot.getKey();
+                    Users users = dataSnapshot.child("info").getValue(Users.class);
+                    String mesg = users.getMessage();
+
+                    if (mesg.equals("accident occured"))
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+
+                        Person person = userSnapshot.getValue(Person.class);
+                        phone = person.getEmContact1();
+
+                        phone = mAuth.getCurrentUser().getPhoneNumber();
+
+                        Log.d("Notification", phone);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });*/
+
+
+            Log.d("Notification", phone);
+            sendSMS(person.getEmContact1(),person.toString());
+        }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.DONUT)
+    public void sendSMS(String phn, Object message) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phn, null, String.valueOf(message), null, null);
+            Toast.makeText(getApplicationContext(), "Message sent", Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), ex.getMessage().toString(), Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
